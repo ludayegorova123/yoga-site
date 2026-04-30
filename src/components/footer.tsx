@@ -1,8 +1,19 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Instagram, Mail } from "lucide-react";
+import { useLanguage } from "@/context/language-context";
 
 export function Footer() {
+  const { t } = useLanguage();
+
+  const navLinks = [
+    { href: "/yoga-courses",    label: t.nav.yogaCourses },
+    { href: "/wellness-travel", label: t.nav.wellnessTravel },
+    { href: "/coaching",        label: t.nav.coaching },
+  ];
+
   return (
     <footer className="bg-bark text-sand/80">
       <div className="max-w-7xl mx-auto px-6 py-14">
@@ -24,26 +35,22 @@ export function Footer() {
                   Ludmila Yegorova
                 </p>
                 <p className="font-body text-[10px] tracking-[0.2em] uppercase text-sage-light mt-0.5">
-                  Yoga · Travel · Coaching
+                  {t.nav.tagline}
                 </p>
               </div>
             </div>
             <p className="font-display text-xl italic text-sand leading-snug">
-              &ldquo;Розквітаймо разом.&rdquo;
+              &ldquo;{t.footer.tagline}&rdquo;
             </p>
           </div>
 
           {/* Links */}
           <div>
             <p className="font-body text-xs tracking-widest uppercase text-sand/50 mb-4">
-              Досліджуй
+              {t.footer.explore}
             </p>
             <ul className="flex flex-col gap-2">
-              {[
-                { href: "/yoga-courses", label: "Yoga Courses" },
-                { href: "/wellness-travel", label: "Wellness Travel" },
-                { href: "/coaching", label: "Coaching" },
-              ].map((l) => (
+              {navLinks.map((l) => (
                 <li key={l.href}>
                   <Link
                     href={l.href}
@@ -59,7 +66,7 @@ export function Footer() {
           {/* Contact */}
           <div id="contact">
             <p className="font-body text-xs tracking-widest uppercase text-sand/50 mb-4">
-              Контакти
+              {t.footer.connect}
             </p>
             <div className="flex flex-col gap-3">
               <a
@@ -87,14 +94,14 @@ export function Footer() {
                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/>
                 </svg>
-                Telegram-спільнота
+                {t.footer.telegram}
               </a>
             </div>
           </div>
         </div>
 
         <div className="mt-10 pt-6 border-t border-sand/10 text-center text-xs text-sand/30">
-          © {new Date().getFullYear()} Людмила Єгорова. Усі права захищені.
+          © {new Date().getFullYear()} Людмила Єгорова. {t.footer.rights}
         </div>
       </div>
     </footer>

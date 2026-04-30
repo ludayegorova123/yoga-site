@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Send, CheckCircle2 } from "lucide-react";
+import { useLanguage } from "@/context/language-context";
 
 interface ContactFormProps {
   subject?: string;
@@ -9,6 +10,9 @@ interface ContactFormProps {
 }
 
 export function ContactForm({ subject = "Website Inquiry", dark = false }: ContactFormProps) {
+  const { t } = useLanguage();
+  const f = t.form;
+
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
 
@@ -36,16 +40,16 @@ export function ContactForm({ subject = "Website Inquiry", dark = false }: Conta
       <div className="flex flex-col items-center justify-center gap-4 py-12 text-center">
         <CheckCircle2 size={40} className="text-sage" />
         <p className={`font-display text-xl font-semibold ${dark ? "text-off-white" : "text-bark"}`}>
-          Ваше повідомлення вже летить!
+          {f.sent}
         </p>
         <p className={`font-body text-sm ${dark ? "text-sand/70" : "text-bark/60"}`}>
-          Я відповім протягом 1–2 робочих днів.
+          {f.sentSub}
         </p>
         <button
           onClick={() => { setForm({ name: "", email: "", message: "" }); setSent(false); }}
           className="mt-2 text-sm text-terra underline underline-offset-2"
         >
-          Надіслати ще одне повідомлення
+          {f.sendAnother}
         </button>
       </div>
     );
@@ -55,22 +59,22 @@ export function ContactForm({ subject = "Website Inquiry", dark = false }: Conta
     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className={labelClass}>Ваше ім&rsquo;я</label>
+          <label className={labelClass}>{f.name}</label>
           <input
             type="text"
             required
-            placeholder="Людмила"
+            placeholder={f.namePlaceholder}
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
             className={inputClass}
           />
         </div>
         <div>
-          <label className={labelClass}>Email-адреса</label>
+          <label className={labelClass}>{f.email}</label>
           <input
             type="email"
             required
-            placeholder="you@email.com"
+            placeholder={f.emailPlaceholder}
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
             className={inputClass}
@@ -78,11 +82,11 @@ export function ContactForm({ subject = "Website Inquiry", dark = false }: Conta
         </div>
       </div>
       <div>
-        <label className={labelClass}>Повідомлення</label>
+        <label className={labelClass}>{f.message}</label>
         <textarea
           required
           rows={5}
-          placeholder="Розкажи трохи про себе і що тебе цікавить…"
+          placeholder={f.msgPlaceholder}
           value={form.message}
           onChange={(e) => setForm({ ...form, message: e.target.value })}
           className={`${inputClass} resize-none`}
@@ -92,7 +96,7 @@ export function ContactForm({ subject = "Website Inquiry", dark = false }: Conta
         type="submit"
         className="self-start inline-flex items-center gap-2 px-7 py-3 bg-terra text-white font-body font-medium text-sm rounded-full hover:bg-terra-dark transition-colors duration-200"
       >
-        Надіслати <Send size={14} />
+        {f.submit} <Send size={14} />
       </button>
     </form>
   );

@@ -3,43 +3,41 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { useLanguage } from "@/context/language-context";
 
-const accordionItems = [
+const accordionBase = [
   {
     id: 1,
     title: "Yoga Courses",
-    subtitle: "Рухайся. Дихай. Змінюйся.",
     imageUrl: "/images/yoga-namaste.jpg",
     href: "/yoga-courses",
-    description:
-      "Онлайн-заняття та структуровані курси для будь-якого рівня — від перших потоків до глибокої практики.",
   },
   {
     id: 2,
     title: "Wellness Travel",
-    subtitle: "Досліджуй. Єднайся. Відновлюйся.",
     imageUrl: "/images/travel-desert-dunes.jpg",
     href: "/wellness-travel",
-    description:
-      "Ретрити та групові поїздки, що поєднують пригоди, усвідомленість і спільноту.",
   },
   {
     id: 3,
     title: "Coaching",
-    subtitle: "Зростай. Розквітай. Процвітай.",
     imageUrl: "/images/community.jpg",
     href: "/coaching",
-    description:
-      "Трансформаційний коучинг 1:1 та в групах, щоб створити життя, на яке ти заслуговуєш.",
   },
 ];
 
 function AccordionPanel({
   item,
+  subtitle,
+  description,
+  btn,
   isActive,
   onMouseEnter,
 }: {
-  item: (typeof accordionItems)[0];
+  item: (typeof accordionBase)[0];
+  subtitle: string;
+  description: string;
+  btn: string;
   isActive: boolean;
   onMouseEnter: () => void;
 }) {
@@ -79,19 +77,19 @@ function AccordionPanel({
       {isActive && (
         <div className="absolute bottom-0 left-0 right-0 p-6 text-off-white">
           <p className="font-body text-xs tracking-[0.25em] uppercase text-terra-light mb-1">
-            {item.subtitle}
+            {subtitle}
           </p>
           <h3 className="font-display text-2xl font-semibold mb-2">
             {item.title}
           </h3>
           <p className="font-body text-sm text-sand/90 mb-4 leading-relaxed">
-            {item.description}
+            {description}
           </p>
           <Link
             href={item.href}
             className="inline-flex items-center gap-2 px-4 py-2 bg-terra text-white text-sm font-medium rounded-full hover:bg-terra-dark transition-colors duration-200"
           >
-            Детальніше <ArrowRight size={14} />
+            {btn} <ArrowRight size={14} />
           </Link>
         </div>
       )}
@@ -101,13 +99,17 @@ function AccordionPanel({
 
 export function PillarAccordion() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const { t } = useLanguage();
 
   return (
     <div className="flex flex-row items-stretch gap-3 overflow-x-auto py-2">
-      {accordionItems.map((item, index) => (
+      {accordionBase.map((item, index) => (
         <AccordionPanel
           key={item.id}
           item={item}
+          subtitle={t.accordion[index].subtitle}
+          description={t.accordion[index].description}
+          btn={t.accordion[index].btn}
           isActive={index === activeIndex}
           onMouseEnter={() => setActiveIndex(index)}
         />

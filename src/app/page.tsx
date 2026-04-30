@@ -1,10 +1,43 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { PillarAccordion } from "@/components/ui/interactive-image-accordion";
 import { ContactForm } from "@/components/ui/contact-form";
+import { useLanguage } from "@/context/language-context";
 
 export default function HomePage() {
+  const { t } = useLanguage();
+  const h = t.home;
+
+  const pillars = [
+    {
+      title: "Yoga Courses",
+      icon: "🧘",
+      description: h.yogaDesc,
+      cta: h.yogaCta,
+      href: "/yoga-courses",
+      image: "/images/yoga-twist.jpg",
+    },
+    {
+      title: "Wellness Travel",
+      icon: "✈️",
+      description: h.travelDesc,
+      cta: h.travelCta,
+      href: "/wellness-travel",
+      image: "/images/travel-grand-canyon.jpg",
+    },
+    {
+      title: "Coaching",
+      icon: "💫",
+      description: h.coachingDesc,
+      cta: h.coachingCta,
+      href: "/coaching",
+      image: "/images/community.jpg",
+    },
+  ];
+
   return (
     <>
       {/* ── HERO ────────────────────────────────────────────── */}
@@ -18,23 +51,21 @@ export default function HomePage() {
               <div className="flex items-center gap-2">
                 <span className="h-px w-8 bg-terra inline-block" />
                 <span className="font-body text-xs tracking-[0.3em] uppercase text-terra font-medium">
-                  Йога · Подорожі · Коучинг
+                  {h.eyebrow}
                 </span>
               </div>
 
               {/* Headline */}
               <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-bark leading-[1.05] tracking-tight">
-                Let&rsquo;s{" "}
-                <span className="italic text-terra">Flourish</span>
+                {h.h1a}{" "}
+                <span className="italic text-terra">{h.h1b}</span>
                 <br />
-                Together.
+                {h.h1c}
               </h1>
 
               {/* Sub */}
               <p className="font-body text-lg text-bark/70 max-w-md leading-relaxed">
-                Я Людмила Єгорова — вчителька йоги, дослідниця велнесу та коуч.
-                Я створюю простори, де ти можеш рухатись, дихати, подорожувати
-                та розкривати свій найкращий потенціал.
+                {h.intro}
               </p>
 
               {/* CTAs */}
@@ -43,13 +74,13 @@ export default function HomePage() {
                   href="/yoga-courses"
                   className="inline-flex items-center gap-2 px-6 py-3 bg-terra text-white font-body font-medium text-sm rounded-full hover:bg-terra-dark transition-colors duration-200"
                 >
-                  Почати практику <ArrowRight size={15} />
+                  {h.cta1} <ArrowRight size={15} />
                 </Link>
                 <Link
                   href="#about"
                   className="inline-flex items-center gap-2 px-6 py-3 border border-bark/20 text-bark font-body text-sm rounded-full hover:border-bark/40 transition-colors duration-200"
                 >
-                  Про Людмилу
+                  {h.cta2}
                 </Link>
               </div>
 
@@ -76,7 +107,7 @@ export default function HomePage() {
                     ))}
                   </div>
                   <span className="font-body text-sm text-bark/60 group-hover:text-terra transition-colors duration-200">
-                    Приєднатися до Telegram-спільноти →
+                    {h.telegramLink}
                   </span>
                 </a>
 
@@ -103,7 +134,7 @@ export default function HomePage() {
                     <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
                   </svg>
                   <span className="font-body text-sm text-bark/60 group-hover:text-terra transition-colors duration-200">
-                    Стежити в Instagram за оновленнями
+                    {h.instagramLink}
                   </span>
                 </a>
               </div>
@@ -131,7 +162,6 @@ export default function HomePage() {
                   className="object-cover"
                 />
               </div>
-              {/* Decorative shape */}
               <div className="absolute -bottom-4 -right-4 w-32 h-32 rounded-2xl bg-terra/10 -z-10" />
               <div className="absolute -top-4 -left-4 w-20 h-20 rounded-full bg-sage/20 -z-10" />
             </div>
@@ -141,30 +171,27 @@ export default function HomePage() {
               <div className="flex items-center gap-2">
                 <span className="h-px w-8 bg-sage inline-block" />
                 <span className="font-body text-xs tracking-[0.3em] uppercase text-sage font-medium">
-                  Про Людмилу
+                  {h.aboutEyebrow}
                 </span>
               </div>
               <h2 className="font-display text-4xl md:text-5xl font-bold text-bark leading-tight">
-                Рух — це{" "}
-                <span className="italic text-sage-dark">ліки.</span>
+                {h.aboutH2a}{" "}
+                <span className="italic text-sage-dark">{h.aboutH2b}</span>
                 <br />
-                Спільнота — це{" "}
-                <span className="italic text-terra">дім.</span>
+                {h.aboutH2c}{" "}
+                <span className="italic text-terra">{h.aboutH2d}</span>
               </h2>
               <p className="font-body text-base text-bark/70 leading-relaxed">
-                Мій шлях у йозі розпочався як особиста практика і перетворився
-                на покликання — допомагати жінкам відчути свою силу, знайти
-                спокій у русі та будувати життя, сповнене сенсу і радості.
+                {h.aboutP1}
               </p>
               <p className="font-body text-base text-bark/70 leading-relaxed">
-                Через онлайн-курси йоги, трансформаційні подорожі та коучинг
-                від серця я скеровую жінок до найяскравішої версії себе.
+                {h.aboutP2}
               </p>
               <div className="grid grid-cols-3 gap-4 pt-4 border-t border-sand/40">
                 {[
-                  { number: "3+", label: "Роки викладання" },
-                  { number: "100+", label: "Учениці" },
-                  { number: "3", label: "Відвідані континенти" },
+                  { number: "3+", label: h.stat1 },
+                  { number: "100+", label: h.stat2 },
+                  { number: "3", label: h.stat3 },
                 ].map((stat) => (
                   <div key={stat.label} className="text-center">
                     <p className="font-display text-3xl font-bold text-terra">
@@ -188,48 +215,17 @@ export default function HomePage() {
             <div className="flex items-center justify-center gap-2 mb-4">
               <Sparkles size={16} className="text-terra" />
               <span className="font-body text-xs tracking-[0.3em] uppercase text-terra font-medium">
-                Три шляхи до процвітання
+                {h.pillarsEyebrow}
               </span>
               <Sparkles size={16} className="text-terra" />
             </div>
             <h2 className="font-display text-4xl md:text-5xl font-bold text-bark">
-              Що ми робимо разом
+              {h.pillarsH2}
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                title: "Yoga Courses",
-                icon: "🧘",
-                description:
-                  "Структуровані онлайн-курси та живі заняття, які зустрічають тебе там, де ти є, і ведуть туди, куди ти прагнеш — на килимку і в житті.",
-                cta: "Переглянути заняття",
-                href: "/yoga-courses",
-                image: "/images/yoga-twist.jpg",
-                accent: "terra",
-              },
-              {
-                title: "Wellness Travel",
-                icon: "✈️",
-                description:
-                  "Групові ретрити та пригодницькі поїздки до неймовірних місць. Подорож як спосіб розширити свій світ і поглибити практику.",
-                cta: "Переглянути поїздки",
-                href: "/wellness-travel",
-                image: "/images/travel-grand-canyon.jpg",
-                accent: "sage",
-              },
-              {
-                title: "Coaching",
-                icon: "💫",
-                description:
-                  "Індивідуальні та групові коучинг-програми, що допомагають подолати блоки, прояснити бачення та набрати темп у житті.",
-                cta: "Працювати з Людмилою",
-                href: "/coaching",
-                image: "/images/community.jpg",
-                accent: "bark",
-              },
-            ].map((pillar) => (
+            {pillars.map((pillar) => (
               <Link
                 key={pillar.title}
                 href={pillar.href}
@@ -260,34 +256,32 @@ export default function HomePage() {
 
       {/* ── CTA BANNER ──────────────────────────────────────── */}
       <section className="bg-bark py-20 relative overflow-hidden">
-        {/* Decorative circles */}
         <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-terra/10 translate-x-1/2 -translate-y-1/2" />
         <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-sage/10 -translate-x-1/2 translate-y-1/2" />
 
         <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
           <p className="font-display text-xl italic text-sand/60 mb-3">
-            &ldquo;Дорога в тисячу миль починається з першого кроку.&rdquo;
+            {h.bannerQuote}
           </p>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-off-white mb-6">
-            Готова{" "}
-            <span className="italic text-terra">процвітати?</span>
+            {h.bannerH2a}{" "}
+            <span className="italic text-terra">{h.bannerH2b}</span>
           </h2>
           <p className="font-body text-base text-sand/80 mb-8 max-w-lg mx-auto">
-            Чи ти вперше стаєш на килимок, чи вже готова підкорювати нові горизонти
-            — тут є місце саме для тебе.
+            {h.bannerBody}
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/yoga-courses"
               className="px-8 py-3.5 bg-terra text-white font-body font-medium text-sm rounded-full hover:bg-terra-dark transition-colors duration-200"
             >
-              Починаємо з йоги
+              {h.bannerCta1}
             </Link>
             <Link
               href="/#contact"
               className="px-8 py-3.5 border border-sand/30 text-sand font-body text-sm rounded-full hover:border-sand/60 transition-colors duration-200"
             >
-              Зв&rsquo;язатися
+              {h.bannerCta2}
             </Link>
           </div>
         </div>
@@ -301,17 +295,15 @@ export default function HomePage() {
               <div className="flex items-center gap-2 mb-4">
                 <span className="h-px w-8 bg-terra inline-block" />
                 <span className="font-body text-xs tracking-[0.3em] uppercase text-terra font-medium">
-                  Напишіть нам
+                  {h.contactEyebrow}
                 </span>
               </div>
               <h2 className="font-display text-4xl font-bold text-off-white mb-4 leading-tight">
-                Почнімо{" "}
-                <span className="italic text-terra">розмову.</span>
+                {h.contactH2a}{" "}
+                <span className="italic text-terra">{h.contactH2b}</span>
               </h2>
               <p className="font-body text-base text-sand/70 leading-relaxed mb-8">
-                Є питання про йогу, поїздку, коучинг або просто хочеш
-                привітатися — моя скринька завжди відкрита. Я особисто читаю
-                кожне повідомлення.
+                {h.contactBody}
               </p>
               <div className="flex flex-col gap-3">
                 <a
@@ -320,11 +312,11 @@ export default function HomePage() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 bg-terra text-white text-sm font-medium rounded-full hover:bg-terra-dark transition-colors duration-200 w-fit"
                 >
-                  <ArrowRight size={14} /> Забронювати дзвінок у Calendly
+                  <ArrowRight size={14} /> {h.contactCalendly}
                 </a>
               </div>
             </div>
-            <ContactForm subject="General Inquiry" dark />
+            <ContactForm subject={h.contactSubject} dark />
           </div>
         </div>
       </section>

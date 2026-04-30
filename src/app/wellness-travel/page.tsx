@@ -1,68 +1,28 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, MapPin, Users, Calendar } from "lucide-react";
-import type { Metadata } from "next";
 import { CalendlyEmbed } from "@/components/ui/calendly-embed";
 import { ContactForm } from "@/components/ui/contact-form";
+import { useLanguage } from "@/context/language-context";
 
-export const metadata: Metadata = {
-  title: "Wellness Travel — Ludmila Yegorova",
-  description:
-    "Join Ludmila on transformational group retreats and wellness travel experiences around the world.",
-};
-
-const upcomingTrips = [
-  {
-    title: "Desert Soul Retreat",
-    location: "Американський Південний захід",
-    dates: "Незабаром 2026",
-    spots: "Обмежена кількість місць",
-    description:
-      "7-денна подорож крізь захопливі пустельні пейзажі. Щоденна йога, медитація, хайкінг і споглядання зірок у колі однодумців.",
-    image: "/images/travel-desert-dunes.jpg",
-    tags: ["Йога", "Хайкінг", "Медитація", "Спільнота"],
-  },
-  {
-    title: "Національні парки: дослідження",
-    location: "Каліфорнія, США",
-    dates: "Незабаром 2026",
-    spots: "Обмежена кількість місць",
-    description:
-      "Постій серед древніх гігантів у Секвойї, практикуй йогу на світанку над каньйонами та відновити зв'язок із природним світом.",
-    image: "/images/travel-sequoia.jpg",
-    tags: ["Природа", "Йога", "Пригоди", "Зцілення"],
-  },
-  {
-    title: "Червоні скелі: оновлення",
-    location: "Невада та Юта",
-    dates: "Незабаром 2026",
-    spots: "Обмежена кількість місць",
-    description:
-      "Досліджуй каньйони з червоних скель і безмежні відкриті простори. Рух, тиша і спільний досвід в одному з найкрасивіших куточків землі.",
-    image: "/images/travel-red-rock.jpg",
-    tags: ["Йога", "Усвідомленість", "Дослідження", "Спільнота"],
-  },
+const tripImages = [
+  "/images/travel-desert-dunes.jpg",
+  "/images/travel-sequoia.jpg",
+  "/images/travel-red-rock.jpg",
 ];
 
-const travelExperience = [
-  {
-    icon: <Users size={20} />,
-    title: "Малі групи",
-    description: "Камерний формат забезпечує особисту увагу та справжній зв'язок.",
-  },
-  {
-    icon: <MapPin size={20} />,
-    title: "Продумані напрямки",
-    description: "Кожне місце обране, щоб надихати і поглиблювати твою практику.",
-  },
-  {
-    icon: <Calendar size={20} />,
-    title: "Все включено",
-    description: "Проживання, щоденна йога, хайкінг і спільні трапези — всі деталі на нас.",
-  },
+const featureIcons = [
+  <Users key="users" size={20} />,
+  <MapPin key="map" size={20} />,
+  <Calendar key="cal" size={20} />,
 ];
 
 export default function WellnessTravelPage() {
+  const { t } = useLanguage();
+  const tr = t.travel;
+
   return (
     <>
       {/* ── HERO ──────────────────────────────────────────── */}
@@ -82,7 +42,7 @@ export default function WellnessTravelPage() {
           <div className="flex items-center gap-2 mb-4">
             <span className="h-px w-8 bg-terra inline-block" />
             <span className="font-body text-xs tracking-[0.3em] uppercase text-terra font-medium">
-              Групові ретрити та подорожі
+              {tr.eyebrow}
             </span>
           </div>
           <h1 className="font-display text-5xl md:text-7xl font-bold leading-tight max-w-2xl mb-4">
@@ -90,15 +50,13 @@ export default function WellnessTravelPage() {
             <span className="italic text-terra">Renew.</span>
           </h1>
           <p className="font-body text-lg text-sand/90 max-w-xl mb-8 leading-relaxed">
-            Подорож — один з найпотужніших інструментів зростання. Приєднуйся до
-            ретритів і велнес-поїздок, що поєднують неймовірні місця, щоденну
-            йогу і магію спільного досвіду.
+            {tr.body}
           </p>
           <Link
             href="#trips"
             className="inline-flex items-center gap-2 px-7 py-3.5 bg-terra text-white font-medium text-sm rounded-full hover:bg-terra-dark transition-colors duration-200"
           >
-            Переглянути поїздки <ArrowRight size={15} />
+            {tr.cta} <ArrowRight size={15} />
           </Link>
         </div>
       </section>
@@ -108,18 +66,18 @@ export default function WellnessTravelPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="font-display text-4xl font-bold text-bark">
-              Подорожі, що{" "}
-              <span className="italic text-sage-dark">трансформують.</span>
+              {tr.transformH2a}{" "}
+              <span className="italic text-sage-dark">{tr.transformH2b}</span>
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {travelExperience.map((feature) => (
+            {tr.features.map((feature, i) => (
               <div
                 key={feature.title}
                 className="flex flex-col items-center text-center gap-4 p-8 rounded-3xl bg-off-white"
               >
                 <div className="w-12 h-12 rounded-2xl bg-terra/10 flex items-center justify-center text-terra">
-                  {feature.icon}
+                  {featureIcons[i]}
                 </div>
                 <h3 className="font-display text-xl font-semibold text-bark">
                   {feature.title}
@@ -159,24 +117,24 @@ export default function WellnessTravelPage() {
             <div className="flex items-center justify-center gap-2 mb-3">
               <span className="h-px w-8 bg-terra inline-block" />
               <span className="font-body text-xs tracking-[0.3em] uppercase text-terra font-medium">
-                Наступні подорожі
+                {tr.tripsEyebrow}
               </span>
               <span className="h-px w-8 bg-terra inline-block" />
             </div>
             <h2 className="font-display text-4xl md:text-5xl font-bold text-bark">
-              Куди ми вирушимо?
+              {tr.tripsH2}
             </h2>
           </div>
 
           <div className="flex flex-col gap-8">
-            {upcomingTrips.map((trip, i) => (
+            {tr.trips.map((trip, i) => (
               <div
                 key={trip.title}
                 className={`flex flex-col ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} bg-cream rounded-3xl overflow-hidden group hover:shadow-lg transition-shadow duration-300`}
               >
                 <div className="relative md:w-2/5 h-72 md:h-auto overflow-hidden">
                   <Image
-                    src={trip.image}
+                    src={tripImages[i]}
                     alt={trip.title}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -217,7 +175,7 @@ export default function WellnessTravelPage() {
                     href="/#contact"
                     className="inline-flex items-center gap-2 px-6 py-3 bg-bark text-off-white text-sm font-medium rounded-full hover:bg-bark-dark transition-colors duration-200 w-fit"
                   >
-                    Записатися <ArrowRight size={14} />
+                    {tr.registerBtn} <ArrowRight size={14} />
                   </Link>
                 </div>
               </div>
@@ -242,13 +200,11 @@ export default function WellnessTravelPage() {
             </div>
             <div className="text-off-white">
               <h2 className="font-display text-4xl font-bold mb-4 leading-tight">
-                Подорожуй з жінками, які{" "}
-                <span className="italic">розуміють.</span>
+                {tr.communityH2a}{" "}
+                <span className="italic">{tr.communityH2b}</span>
               </h2>
               <p className="font-body text-base text-off-white/80 leading-relaxed mb-6">
-                Кожна поїздка, яку я організовую, — це більше ніж відпустка.
-                Жінки приходять незнайомками, а йдуть сестрами, із спогадами та
-                дружбою, що залишаються надовго після повернення додому.
+                {tr.communityP}
               </p>
             </div>
           </div>
@@ -258,8 +214,8 @@ export default function WellnessTravelPage() {
       {/* ── BOOK A CALL ─────────────────────────────────────── */}
       <CalendlyEmbed
         url="https://calendly.com/kievyogaclass"
-        heading="Цікавить якась поїздка?"
-        subheading="Забронюй безкоштовний 15-хвилинний дзвінок, щоб дізнатися більше про наступні подорожі, вартість та що на тебе чекає."
+        heading={tr.calendlyH}
+        subheading={tr.calendlySub}
       />
 
       {/* ── CONTACT ─────────────────────────────────────────── */}
@@ -267,14 +223,13 @@ export default function WellnessTravelPage() {
         <div className="max-w-2xl mx-auto px-6">
           <div className="text-center mb-10">
             <h2 className="font-display text-4xl font-bold text-off-white mb-3">
-              Напиши мені
+              {tr.contactH2}
             </h2>
             <p className="font-body text-base text-sand/70">
-              Питання про поїздку, розмір групи, що взяти з собою? Напиши —
-              відповім протягом 1–2 днів.
+              {tr.contactBody}
             </p>
           </div>
-          <ContactForm subject="Wellness Travel Inquiry" dark />
+          <ContactForm subject={tr.contactSubject} dark />
         </div>
       </section>
     </>

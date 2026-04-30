@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
-import { PhotoGallery } from "@/components/ui/photo-gallery";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Gallery — Ludmila Yegorova",
-  description: "Photos from yoga practice, wellness travel, and community gatherings with Ludmila Yegorova.",
-};
+import { PhotoGallery } from "@/components/ui/photo-gallery";
+import { useLanguage } from "@/context/language-context";
 
 export default function GalleryPage() {
+  const { t } = useLanguage();
+  const g = t.gallery;
+
   return (
     <>
       {/* ── HEADER ──────────────────────────────────────────── */}
@@ -15,7 +15,7 @@ export default function GalleryPage() {
           <div className="flex items-center justify-center gap-2 mb-4">
             <span className="h-px w-8 bg-terra inline-block" />
             <span className="font-body text-xs tracking-[0.3em] uppercase text-terra font-medium">
-              Фотогалерея
+              {g.eyebrow}
             </span>
             <span className="h-px w-8 bg-terra inline-block" />
           </div>
@@ -24,8 +24,7 @@ export default function GalleryPage() {
             <span className="italic text-terra">Memories</span>
           </h1>
           <p className="font-body text-base text-bark/60 max-w-lg mx-auto leading-relaxed">
-            Погляд у світ йоги, подорожей і спільноти.
-            Фільтруй за категорією або натисни на фото, щоб розглянути детальніше.
+            {g.body}
           </p>
         </div>
       </section>

@@ -1,55 +1,22 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Play, CheckCircle2 } from "lucide-react";
-import type { Metadata } from "next";
 import { CalendlyEmbed } from "@/components/ui/calendly-embed";
 import { ContactForm } from "@/components/ui/contact-form";
+import { useLanguage } from "@/context/language-context";
 
-export const metadata: Metadata = {
-  title: "Yoga Courses — Ludmila Yegorova",
-  description:
-    "Online yoga classes and structured courses for every level. Move, breathe, and transform with Ludmila Yegorova.",
-};
-
-const courses = [
-  {
-    title: "Ранковий потік: основи",
-    level: "Початківці",
-    format: "4-тижневий курс",
-    description:
-      "Сформуй стабільну ранкову практику з енергійними потоками, що пробуджують тіло і налаштовують на позитивний день.",
-    image: "/images/yoga-outdoor.jpg",
-    price: "Незабаром",
-  },
-  {
-    title: "Глибоке розтягнення і відновлення",
-    level: "Всі рівні",
-    format: "On-demand",
-    description:
-      "Сповільнись, дихай глибше, відпускай напругу. Цей клас поєднує інь-йогу і відновлювальні пози для повного оновлення тіла.",
-    image: "/images/yoga-twist.jpg",
-    price: "Незабаром",
-  },
-  {
-    title: "Сила і потік",
-    level: "Середній рівень",
-    format: "6-тижневий курс",
-    description:
-      "Кинь виклик своєму тілу з динамічними послідовностями, що розвивають силу, баланс і плавність. Для тих, хто готовий поглибити практику.",
-    image: "/images/yoga-namaste.jpg",
-    price: "Незабаром",
-  },
-];
-
-const included = [
-  "HD-відеозаняття, доступні будь-коли і будь-де",
-  "Модифікації до кожної пози для безпечної практики",
-  "Пранаяма та дихальні техніки у кожному занятті",
-  "Підтримуюча спільнота жінок на спільному шляху",
-  "Особиста підтримка від Людмили",
+const courseImages = [
+  "/images/yoga-outdoor.jpg",
+  "/images/yoga-twist.jpg",
+  "/images/yoga-namaste.jpg",
 ];
 
 export default function YogaCoursesPage() {
+  const { t } = useLanguage();
+  const y = t.yoga;
+
   return (
     <>
       {/* ── HERO ──────────────────────────────────────────── */}
@@ -69,7 +36,7 @@ export default function YogaCoursesPage() {
           <div className="flex items-center gap-2 mb-4">
             <span className="h-px w-8 bg-terra inline-block" />
             <span className="font-body text-xs tracking-[0.3em] uppercase text-terra font-medium">
-              Онлайн-йога
+              {y.eyebrow}
             </span>
           </div>
           <h1 className="font-display text-5xl md:text-7xl font-bold leading-tight max-w-2xl mb-4">
@@ -77,15 +44,13 @@ export default function YogaCoursesPage() {
             <span className="italic text-terra">Transform.</span>
           </h1>
           <p className="font-body text-lg text-sand/90 max-w-xl mb-8 leading-relaxed">
-            Заняття та курси йоги для будь-якого рівня — від першого привітання
-            сонцю до просунутих потоків. Практикуй за своїм розкладом,
-            з будь-якої точки світу.
+            {y.body}
           </p>
           <Link
             href="#courses"
             className="inline-flex items-center gap-2 px-7 py-3.5 bg-terra text-white font-medium text-sm rounded-full hover:bg-terra-dark transition-colors duration-200"
           >
-            Переглянути всі курси <ArrowRight size={15} />
+            {y.cta} <ArrowRight size={15} />
           </Link>
         </div>
       </section>
@@ -98,15 +63,15 @@ export default function YogaCoursesPage() {
               <div className="flex items-center gap-2 mb-4">
                 <span className="h-px w-8 bg-sage inline-block" />
                 <span className="font-body text-xs tracking-[0.3em] uppercase text-sage font-medium">
-                  Що ви отримаєте
+                  {y.whatEyebrow}
                 </span>
               </div>
               <h2 className="font-display text-4xl font-bold text-bark mb-6 leading-tight">
-                Практика, що вписується{" "}
-                <span className="italic text-terra">у твоє життя.</span>
+                {y.whatH2a}{" "}
+                <span className="italic text-terra">{y.whatH2b}</span>
               </h2>
               <ul className="flex flex-col gap-3">
-                {included.map((item) => (
+                {y.included.map((item) => (
                   <li key={item} className="flex items-start gap-3">
                     <CheckCircle2
                       size={18}
@@ -128,7 +93,6 @@ export default function YogaCoursesPage() {
                   fill
                   className="object-cover"
                 />
-                {/* Play button overlay */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="w-16 h-16 rounded-full bg-off-white/20 backdrop-blur-sm border border-white/40 flex items-center justify-center cursor-pointer hover:bg-off-white/30 transition-colors duration-200">
                     <Play size={24} className="text-white ml-1" fill="white" />
@@ -148,24 +112,24 @@ export default function YogaCoursesPage() {
             <div className="flex items-center justify-center gap-2 mb-3">
               <span className="h-px w-8 bg-terra inline-block" />
               <span className="font-body text-xs tracking-[0.3em] uppercase text-terra font-medium">
-                Поточні пропозиції
+                {y.coursesEyebrow}
               </span>
               <span className="h-px w-8 bg-terra inline-block" />
             </div>
             <h2 className="font-display text-4xl md:text-5xl font-bold text-bark">
-              Обери свій шлях
+              {y.coursesH2}
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {courses.map((course) => (
+            {y.courses.map((course, i) => (
               <div
                 key={course.title}
                 className="bg-cream rounded-3xl overflow-hidden group hover:shadow-lg transition-shadow duration-300"
               >
                 <div className="relative h-56 overflow-hidden">
                   <Image
-                    src={course.image}
+                    src={courseImages[i]}
                     alt={course.title}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -191,7 +155,7 @@ export default function YogaCoursesPage() {
                       {course.price}
                     </span>
                     <button className="px-4 py-2 bg-bark text-off-white text-xs font-medium rounded-full hover:bg-bark-dark transition-colors duration-200">
-                      Повідомте мене
+                      {y.notifyMe}
                     </button>
                   </div>
                 </div>
@@ -204,8 +168,8 @@ export default function YogaCoursesPage() {
       {/* ── BOOK A CALL ─────────────────────────────────────── */}
       <CalendlyEmbed
         url="https://calendly.com/kievyogaclass"
-        heading="Не знаєш з чого почати?"
-        subheading="Забронюй безкоштовний 15-хвилинний дзвінок — я допоможу підібрати заняття або курс, що підходить саме тобі."
+        heading={y.calendlyH}
+        subheading={y.calendlySub}
       />
 
       {/* ── CONTACT ─────────────────────────────────────────── */}
@@ -213,14 +177,13 @@ export default function YogaCoursesPage() {
         <div className="max-w-2xl mx-auto px-6">
           <div className="text-center mb-10">
             <h2 className="font-display text-4xl font-bold text-off-white mb-3">
-              Напиши мені
+              {y.contactH2}
             </h2>
             <p className="font-body text-base text-sand/70">
-              Питання про курс, розклад або чи підходить тобі йога?
-              Буду рада почути від тебе.
+              {y.contactBody}
             </p>
           </div>
-          <ContactForm subject="Yoga Course Inquiry" dark />
+          <ContactForm subject={y.contactSubject} dark />
         </div>
       </section>
     </>

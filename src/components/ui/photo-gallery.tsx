@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { useLanguage } from "@/context/language-context";
 
 const photos = [
   { src: "/images/portrait.jpg",           category: "about",    alt: "Ludmila Yegorova" },
@@ -17,15 +18,18 @@ const photos = [
   { src: "/images/community.jpg",           category: "community", alt: "Community gathering" },
 ];
 
-const categories = [
-  { key: "all",       label: "Всі" },
-  { key: "yoga",      label: "Йога" },
-  { key: "travel",    label: "Подорожі" },
-  { key: "community", label: "Спільнота" },
-  { key: "about",     label: "Про мене" },
-];
-
 export function PhotoGallery() {
+  const { t } = useLanguage();
+  const cats = t.gallery.cats;
+
+  const categories = [
+    { key: "all",       label: cats.all },
+    { key: "yoga",      label: cats.yoga },
+    { key: "travel",    label: cats.travel },
+    { key: "community", label: cats.community },
+    { key: "about",     label: cats.about },
+  ];
+
   const [active, setActive] = useState("all");
   const [lightbox, setLightbox] = useState<number | null>(null);
 
@@ -96,7 +100,7 @@ export function PhotoGallery() {
             {/* Hover overlay */}
             <div className="absolute inset-0 bg-bark/0 group-hover:bg-bark/25 transition-colors duration-300 flex items-center justify-center">
               <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white font-body text-sm tracking-widest uppercase">
-                Переглянути
+                {t.gallery.view}
               </span>
             </div>
           </div>

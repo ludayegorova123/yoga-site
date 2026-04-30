@@ -5,17 +5,19 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { useLanguage } from "@/context/language-context";
 
 const navLinks = [
-  { href: "/yoga-courses", label: "Yoga Courses" },
-  { href: "/wellness-travel", label: "Wellness Travel" },
-  { href: "/coaching", label: "Coaching" },
-  { href: "/gallery", label: "Gallery" },
+  { href: "/yoga-courses",    key: "yogaCourses" as const },
+  { href: "/wellness-travel", key: "wellnessTravel" as const },
+  { href: "/coaching",        key: "coaching" as const },
+  { href: "/gallery",         key: "gallery" as const },
 ];
 
 export function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { lang, t, toggle } = useLanguage();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-off-white/90 backdrop-blur-md border-b border-sand/40">
@@ -36,7 +38,7 @@ export function Navbar() {
               Ludmila Yegorova
             </p>
             <p className="font-body text-[10px] tracking-[0.2em] uppercase text-sage mt-0.5">
-              Yoga · Travel · Coaching
+              {t.nav.tagline}
             </p>
           </div>
         </Link>
@@ -57,7 +59,7 @@ export function Navbar() {
                   }
                 `}
               >
-                {link.label}
+                {t.nav[link.key]}
                 {isActive && (
                   <span className="absolute bottom-0 left-5 right-5 h-[2px] bg-terra rounded-full" />
                 )}
@@ -68,18 +70,40 @@ export function Navbar() {
             href="/#contact"
             className="ml-4 px-5 py-2 bg-terra text-off-white text-sm font-medium rounded-full hover:bg-terra-dark transition-colors duration-200"
           >
-            Work with Me
+            {t.nav.workWithMe}
           </Link>
+
+          {/* Language toggle */}
+          <button
+            onClick={toggle}
+            className="ml-3 flex items-center gap-1 px-3 py-1.5 rounded-full border border-bark/20 hover:border-terra hover:text-terra text-bark/60 text-xs font-body font-medium tracking-widest uppercase transition-colors duration-200"
+            aria-label="Toggle language"
+          >
+            <span className={lang === "uk" ? "text-terra font-semibold" : ""}>UA</span>
+            <span className="text-bark/30">|</span>
+            <span className={lang === "en" ? "text-terra font-semibold" : ""}>EN</span>
+          </button>
         </nav>
 
-        {/* Mobile hamburger */}
-        <button
-          className="md:hidden p-2 text-bark"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        {/* Mobile right side: lang toggle + hamburger */}
+        <div className="md:hidden flex items-center gap-2">
+          <button
+            onClick={toggle}
+            className="flex items-center gap-1 px-3 py-1.5 rounded-full border border-bark/20 hover:border-terra hover:text-terra text-bark/60 text-xs font-body font-medium tracking-widest uppercase transition-colors duration-200"
+            aria-label="Toggle language"
+          >
+            <span className={lang === "uk" ? "text-terra font-semibold" : ""}>UA</span>
+            <span className="text-bark/30">|</span>
+            <span className={lang === "en" ? "text-terra font-semibold" : ""}>EN</span>
+          </button>
+          <button
+            className="p-2 text-bark"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
@@ -96,7 +120,7 @@ export function Navbar() {
                   isActive ? "text-terra font-medium" : "text-bark/80"
                 }`}
               >
-                {link.label}
+                {t.nav[link.key]}
               </Link>
             );
           })}
@@ -105,7 +129,7 @@ export function Navbar() {
             onClick={() => setMobileOpen(false)}
             className="mt-2 py-2.5 bg-terra text-off-white text-sm font-medium rounded-full text-center"
           >
-            Work with Me
+            {t.nav.workWithMe}
           </Link>
         </div>
       )}
