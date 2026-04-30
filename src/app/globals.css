@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cream: #F5F0E8;
+  --sage: #8A9A7B;
+  --sage-dark: #6B7A5E;
+  --terra: #5C6B4F;
+  --sand: #D4C5A9;
+  --bark: #4A3728;
+  --off-white: #FAF8F4;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--off-white);
+  color: var(--bark);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer base {
+  h1, h2, h3, h4 {
+    font-family: var(--font-playfair), Georgia, serif;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Subtle grain texture overlay */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 10;
+  }
+}
+
+/* Smooth accordion transition */
+.accordion-panel {
+  transition: width 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
