@@ -148,6 +148,75 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── UPCOMING EVENT ──────────────────────────────────── */}
+      <section className="bg-bark overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 min-h-[50vh]">
+
+            {/* Left: photo */}
+            <div className="relative h-72 md:h-auto">
+              <Image
+                src="/images/travel-sequoia.jpg"
+                alt="Carpathian Yoga Sound Retreat"
+                fill
+                className="object-cover object-center"
+              />
+              {/* Subtle dark edge on the right so it blends into text side */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-bark/60 hidden md:block" />
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-bark/70 md:hidden" />
+            </div>
+
+            {/* Right: content */}
+            <div className="flex flex-col justify-center px-8 py-12 md:px-12 lg:px-16">
+              {/* Eyebrow */}
+              <div className="flex items-center gap-2 mb-4">
+                <span className="h-px w-8 bg-terra inline-block" />
+                <span className="font-body text-xs tracking-[0.3em] uppercase text-terra font-medium">
+                  {t.event.eyebrow}
+                </span>
+              </div>
+
+              {/* Title */}
+              <h2 className="font-display text-4xl md:text-5xl font-bold text-off-white leading-tight mb-4 whitespace-pre-line">
+                {t.event.title}
+              </h2>
+
+              {/* Date + location badges */}
+              <div className="flex flex-wrap gap-3 mb-5">
+                <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-terra/20 border border-terra/40 text-terra text-sm font-body font-medium">
+                  📅 {t.event.dates}
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-sand/10 border border-sand/20 text-sand/80 text-sm font-body">
+                  📍 {t.event.location}
+                </span>
+              </div>
+
+              {/* Description */}
+              <p className="font-body text-base text-sand/75 leading-relaxed mb-8 max-w-md">
+                {t.event.description}
+              </p>
+
+              {/* Buttons */}
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="/wellness-travel"
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-sand/30 text-sand font-body text-sm rounded-full hover:border-terra hover:text-terra transition-colors duration-200"
+                >
+                  {t.event.knowMore}
+                </Link>
+                <Link
+                  href="/#contact"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-terra text-white font-body font-medium text-sm rounded-full hover:bg-terra-dark transition-colors duration-200"
+                >
+                  {t.event.bookNow} <ArrowRight size={14} />
+                </Link>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
       {/* ── ABOUT ───────────────────────────────────────────── */}
       <section id="about" className="bg-cream py-24">
         <div className="max-w-7xl mx-auto px-6">

@@ -265,6 +265,16 @@ export const translations = {
         "My approach is direct but deeply compassionate — I will challenge you, hold space for you, and never let you settle for less than what you're capable of.",
       contactSubject: "Coaching Inquiry",
     },
+    event: {
+      eyebrow: "Upcoming Event",
+      title: "Carpathian Yoga\nSound Retreat",
+      dates: "27 June – 2 July 2026",
+      location: "Carpathians, Ukraine",
+      description:
+        "Six days of morning yoga, sound healing, forest walks, and deep rest nestled in the heart of the Ukrainian Carpathians. A small group of women coming together to slow down, reconnect, and truly flourish.",
+      knowMore: "Know More",
+      bookNow: "Book Now",
+    },
     gallery: {
       eyebrow: "Photo Gallery",
       body: "A glimpse into the world of yoga, travel, and community. Filter by category or click any photo to explore.",
@@ -576,6 +586,16 @@ export const translations = {
       approachQuote:
         "Мій підхід — прямий, але глибоко співчутливий. Я кидатиму тобі виклик, тримала простір для тебе і ніколи не дозволю тобі задовольнятись меншим, ніж ти здатна.",
       contactSubject: "Coaching Inquiry",
+    },
+    event: {
+      eyebrow: "Найближча подія",
+      title: "Карпатський йога\nзвуковий ретрит",
+      dates: "27 червня – 2 липня 2026",
+      location: "Карпати, Україна",
+      description:
+        "Шість днів ранкової йоги, звукового цілення, лісових прогулянок і глибокого відновлення в серці Українських Карпат. Маленька група жінок, що зустрічаються, щоб сповільнитись, відновити зв'язок із собою і по-справжньому розквітнути.",
+      knowMore: "Дізнатись більше",
+      bookNow: "Забронювати",
     },
     gallery: {
       eyebrow: "Фотогалерея",
